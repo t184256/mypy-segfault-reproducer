@@ -1,0 +1,17 @@
+name: test
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - run: pip3 install -U setuptools pip
+      - run: pip3 install mypy
+      - run: mypy --tb -vvvvv decorator.py
